@@ -11,5 +11,6 @@ export type DecisiveGamePoint = number;
 
 export interface Score {
   sets: Array<[SetPoint, SetPoint]>,
-  currentGame: [GamePoint, GamePoint]
+  currentGame: [GamePoint, GamePoint],
+  winner?: FirstPlayerWinsPointCode | SecondPlayerWinsPointCode
 }
