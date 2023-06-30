@@ -5,6 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+  <link rel="stylesheet" href="./style.css">
 
   <title>🎾 Tennis Score Generator 🎾</title>
 </head>
@@ -13,11 +14,13 @@
   <main class="container">
     <h1>🎾 Tennis Score Generator 🎾</h1>
   
+    <h2>Settings</h2>
+
     <form id="generator">
       <div class="grid">
         <div>
           <label for="first-player-name">First player</label>
-          <input type="text" id="first-player-name" name="first-player-name" placeholder="Player name">
+          <input type="text" id="first-player-name" name="first-player-name" placeholder="Player 1">
       
           <label for="first-player-level">Level</label>
           <input type="range" id="first-player-level" min="1" max="10" name="first-player-level">
@@ -25,7 +28,7 @@
     
         <div>
           <label for="second-player-name">Second player</label>
-          <input type="text" id="second-player-name" name="second-player-name" placeholder="Player name">
+          <input type="text" id="second-player-name" name="second-player-name" placeholder="Player 2">
       
           <label for="second-player-level">Level</label>
           <input type="range" id="second-player-level" min="1" max="10" name="second-player-level">
@@ -35,7 +38,10 @@
       <button>Generate score sequence</button>
     </form>
 
-    <ul id="sequence-result"></ul>
+    <h2>Results</h2>
+
+    <article id="sequence-result" class="sequence-result">
+    </article>
 
   </main>
 

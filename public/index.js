@@ -4,30 +4,23 @@ generatorForm.addEventListener("submit", (event) => {
   event.preventDefault();
   const form = new FormData(generatorForm);
 
-  const firstPlayer = {
-    name: form.get("first-player-name"),
-    level: parseInt(form.get("first-player-level")),
-    code: 0
-  };
+  const firstPlayerName = form.get("first-player-name") || "Player 1";
+  const secondPlayerName = form.get("second-player-name") || "Player 2";
+  const firstPlayerLevel = parseInt(form.get("first-player-level"));
+  const secondPlayerLevel = parseInt(form.get("second-player-level"));
 
-  const secondPlayer = {
-    name: form.get("second-player-name"),
-    level: parseInt(form.get("second-player-level")),
-    code: 1
-  };
-
-  const bestPlayer = firstPlayer.level > secondPlayer.level ? firstPlayer : secondPlayer;
-  const weakPlayerCode = Math.abs(bestPlayer.code - 1);
-  const levelDifference = Math.abs(firstPlayer.level - secondPlayer.level);
+  const bestPlayerCode = firstPlayerLevel > secondPlayerLevel ? 0 : 1;
+  const weakPlayerCode = Math.abs(bestPlayerCode - 1);
+  const levelDifference = Math.abs(firstPlayerLevel - secondPlayerLevel);
   const sequence = Array(150).fill().map(generateLikelyPoint);
   
   // Display sequence
   const sequenceResult = document.getElementById("sequence-result");
-  sequenceResult.innerHTML = sequence.map(point => {}).join();
+  sequenceResult.innerHTML = sequence.map(buildPlayerPoint).join("");
   
   function generateLikelyPoint() {
     const threshold = 0.5 + levelDifference / 20;
-    return Math.random() < threshold ? bestPlayer.code: weakPlayerCode.code;
+    return Math.random() < threshold ? bestPlayerCode: weakPlayerCode;
 
     // Explication via exemple : 
     // Niveau (1, 10) => 0.5 + ( |10 - 1| / 20 ) = 0.95% de chance pour le meilleur joueur de gagner
@@ -36,7 +29,7 @@ generatorForm.addEventListener("submit", (event) => {
   }
 
   function buildPlayerPoint(point) {
-    return `Le joueur ${}`
+    return `<li>${point ? secondPlayerName : firstPlayerName } scored !</li>`;
   }
 });
 
