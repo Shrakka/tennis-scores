@@ -1,5 +1,5 @@
 import express, { json } from "express";
-import { computeScoreController } from "./computeScoreController";
+import { computeScoreController } from "./src/computeScoreController";
 
 const app = express();
 
