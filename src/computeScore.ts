@@ -115,6 +115,7 @@ export function computeNextScore(score: Score, point: Point) {
 
 	return score;
 }
+
 function formatFinalScore(score: Score) {
 	return {
 		sets: score.sets.slice(0, -1)
