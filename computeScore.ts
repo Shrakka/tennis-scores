@@ -10,7 +10,9 @@ export function computeScore(points: Array<Point>) {
 	for (const point of points) {
 		score = computeNextScore(score, point);
 
-		if (isMatchOver(score)) { break; }
+		if (isMatchOver(score)) {
+			return formatFinalScore(score);
+		}
 	}
 
 	return score;
@@ -113,3 +115,9 @@ export function computeNextScore(score: Score, point: Point) {
 
 	return score;
 }
+function formatFinalScore(score: Score) {
+	return {
+		sets: score.sets.slice(0, -1)
+	}
+}
+
