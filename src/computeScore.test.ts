@@ -140,28 +140,28 @@ describe("computeScore", () => {
       ...Array(4 * 5).fill(0), // first player wins 5 games
       ...Array(4 * 5).fill(1), // second player wins 5 games
       ...Array(4 * 1).fill(0), // first player wins 1 game
-      ...Array(4 * 1).fill(1)  // second player wins 1 game
+      ...Array(4 * 1).fill(1) // second player wins 1 game
     ];
 
     it("should initiate a tiebreak when both players wins 6 games", async () => {
       const score = computeScore(DECISIVE_GAME_POINTS);
-  
+
       expect(score).to.deep.equal({ sets: [[6, 6]], currentGame: [0, 0] });
     });
-  
+
     it("should increase the score of the tiebreak when first player wins a point", async () => {
       const points: Point[] = [...DECISIVE_GAME_POINTS, 0];
-  
+
       const score = computeScore(points);
-  
+
       expect(score).to.deep.equal({ sets: [[6, 6]], currentGame: [1, 0] });
     });
 
     it("should increase the score of the tiebreak when second player wins a point", async () => {
       const points: Point[] = [...DECISIVE_GAME_POINTS, 1];
-  
+
       const score = computeScore(points);
-  
+
       expect(score).to.deep.equal({ sets: [[6, 6]], currentGame: [0, 1] });
     });
 
@@ -172,7 +172,7 @@ describe("computeScore", () => {
       ];
 
       const score = computeScore(points);
-  
+
       expect(score).to.deep.equal({ sets: [[7, 6], [0, 0]], currentGame: [0, 0] });
     });
 
@@ -183,7 +183,7 @@ describe("computeScore", () => {
       ];
 
       const score = computeScore(points);
-  
+
       expect(score).to.deep.equal({ sets: [[6, 7], [0, 0]], currentGame: [0, 0] });
     });
 
@@ -196,7 +196,7 @@ describe("computeScore", () => {
       ];
 
       const score = computeScore(points);
-  
+
       expect(score).to.deep.equal({ sets: [[6, 6]], currentGame: [7, 6] });
     });
 
@@ -210,7 +210,7 @@ describe("computeScore", () => {
       ];
 
       const score = computeScore(points);
-  
+
       expect(score).to.deep.equal({ sets: [[6, 6]], currentGame: [7, 7] });
     });
 
@@ -226,7 +226,7 @@ describe("computeScore", () => {
       ];
 
       const score = computeScore(points);
-  
+
       expect(score).to.deep.equal({ sets: [[6, 7], [0, 0]], currentGame: [0, 0] });
     });
   });
@@ -243,7 +243,7 @@ describe("computeScore", () => {
       ];
 
       const score = computeScore(points);
-  
+
       expect(score).to.deep.include({ sets: [[6, 0], [6, 0], [6, 0]], winner: 0 });
     });
 
@@ -256,7 +256,7 @@ describe("computeScore", () => {
       ];
 
       const score = computeScore(points);
-  
+
       expect(score).to.deep.include({ sets: [[6, 0], [6, 0], [0, 6], [0, 6], [0, 0]] });
     });
 
@@ -270,7 +270,7 @@ describe("computeScore", () => {
       ];
 
       const score = computeScore(points);
-  
+
       expect(score).to.deep.include({ sets: [[6, 0], [6, 0], [0, 6], [0, 6], [0, 6]], winner: 1 });
     });
 
@@ -278,7 +278,7 @@ describe("computeScore", () => {
       const points: Point[] = Array(1000).fill(0); // First player wins 1000 points
 
       const score = computeScore(points);
-  
+
       expect(score).to.deep.include({ sets: [[6, 0], [6, 0], [6, 0]], winner: 0 });
     });
   });
@@ -290,7 +290,7 @@ describe("computeScore", () => {
       ];
 
       const score = computeScore(points);
-  
+
       expect(score).to.deep.include({ sets: [[0, 1]], currentGame: [0, 0] });
     });
 
@@ -311,7 +311,7 @@ describe("computeScore", () => {
       ];
 
       const score = computeScore(points);
-  
+
       expect(score).to.deep.equal({ sets: [[5, 7], [0, 0]], currentGame: [0, 0] });
     });
   });

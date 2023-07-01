@@ -6,15 +6,12 @@
   "license": "ISC",
   "scripts": {
     "start": "node dist/index.js",
-
     "build": "npm run build:back && npm run build:client",
     "build:back": "tsc",
     "build:client": "npm run build --prefix client",
-    
     "dev": "concurrently \"npm run dev:back\" \"npm run dev:client\" ",
     "dev:back": "nodemon index.ts",
     "dev:client": "npm run dev --prefix client",
-    
     "test": "mocha",
     "coverage": "nyc --reporter=text mocha"
   },
@@ -26,8 +23,11 @@
     "@types/express": "^4.17.17",
     "@types/mocha": "^10.0.1",
     "@types/supertest": "^2.0.12",
+    "@typescript-eslint/eslint-plugin": "^5.60.1",
+    "@typescript-eslint/parser": "^5.60.1",
     "chai": "^4.3.7",
     "concurrently": "^8.2.0",
+    "eslint": "^8.44.0",
     "mocha": "^10.2.0",
     "nodemon": "^2.0.22",
     "nyc": "^15.1.0",
