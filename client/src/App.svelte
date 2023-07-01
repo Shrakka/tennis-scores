@@ -37,7 +37,7 @@
     {#if points.length > 0}
       <h2>Results</h2>
   
-      <div class="grid results">
+      <div class="grid">
         <article class="scrollable">
           <h3>Match summary</h3>
           <table>
@@ -72,7 +72,11 @@
             {#await fetchScore()}
               <button aria-busy="true" disabled>Please wait…</button>
             {:then score}
-              <ScoreTable score={score}/>
+              <ScoreTable
+                score={score}
+                firstPlayerName={firstPlayerName || "Player 1"}
+                secondPlayerName={secondPlayerName || "Player 2"}
+              />
             {:catch error}
               <button class="secondary" disabled>{error.message}</button>
             {/await}
@@ -148,11 +152,12 @@ async function fetchScore() {
 
 
 <style>
+  article {
+    margin: 1rem 0;
+  }
+
   .scrollable {
     overflow: scroll;
-  }
-  
-  .results {
     height: 400px;
   }
 </style>
