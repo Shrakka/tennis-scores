@@ -13,6 +13,8 @@ generatorForm.addEventListener("submit", async (event) => {
   const weakPlayerCode = Math.abs(bestPlayerCode - 1);
   const levelDifference = Math.abs(firstPlayerLevel - secondPlayerLevel);
   const sequence = Array(150).fill().map(generateLikelyPoint);
+
+  console.log(sequence);
   
   // Display sequence
   const sequenceResult = document.getElementById("sequence-result");

@@ -80,6 +80,48 @@ describe("computeScore", () => {
     expect(score).to.deep.equal({ sets: [[0, 6], [0, 0]], currentGame: [0, 0] });
   });
 
+  describe("Deuce aka. égalité", () => {
+    const DEUCE_POINTS: Point[] = [0, 0, 0, 1, 1, 1];
+
+    it("should reach a score of deuce", async () => {
+      const score = computeScore(DEUCE_POINTS);
+
+      expect(score).to.deep.equal({ sets: [[0, 0]], currentGame: [40, 40] });
+    });
+
+    it("should give advantage to the first player", async () => {
+      const points: Point[] = [...DEUCE_POINTS, 0];
+
+      const score = computeScore(points);
+
+      expect(score).to.deep.equal({ sets: [[0, 0]], currentGame: ["AV", 40] });
+    });
+
+    it("should give advantage to the second player", async () => {
+      const points: Point[] = [...DEUCE_POINTS, 1];
+
+      const score = computeScore(points);
+
+      expect(score).to.deep.equal({ sets: [[0, 0]], currentGame: [40, "AV"] });
+    });
+
+    it("should let the first player win a game when winning two points in a row after a deuce", async () => {
+      const points: Point[] = [...DEUCE_POINTS, 0, 0];
+
+      const score = computeScore(points);
+
+      expect(score).to.deep.equal({ sets: [[1, 0]], currentGame: [0, 0] });
+    });
+
+    it("should bring back the score to Deuce if the first player loses the point while at Avantage", async () => {
+      const points: Point[] = [...DEUCE_POINTS, 0, 1];
+
+      const score = computeScore(points);
+
+      expect(score).to.deep.equal({ sets: [[0, 0]], currentGame: [40, 40] });
+    });
+  });
+
   describe("tiebreaks", () => {
     const DECISIVE_GAME_POINTS: Point[] = [
       ...Array(4 * 5).fill(0), // first player wins 5 games
@@ -225,6 +267,18 @@ describe("computeScore", () => {
       const score = computeScore(points);
   
       expect(score).to.deep.include({ sets: [[6, 0], [6, 0], [6, 0]], winner: 0 });
+    });
+  });
+
+  describe("sample matches", () => {
+    it("should give the correct match score", async () => {
+      const points: Point[] = [
+        0, 0, 1, 1, 0, 1, 1, 1, // First set : 0 - 1
+      ];
+
+      const score = computeScore(points);
+  
+      expect(score).to.deep.include({ sets: [[0, 1]], currentGame: [0, 0] });
     });
   });
 });

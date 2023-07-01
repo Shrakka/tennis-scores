@@ -44,8 +44,7 @@ export function computeNextScore(score: Score, point: Point) {
 		}
 		
 		// Sinon, le joueur mène d'au moins un point et a déjà 6 points : il vient donc de gagner le set !
-		score.sets[score.sets.length - 1][winnerCode] = 7;
-		score.sets[score.sets.length - 1][loserCode] = 6;
+		score.sets[score.sets.length - 1][winnerCode] += 1; // On augmente son nombre de jeu gagné
 		score.sets.push([0, 0]); // On initialise le prochain set
 		score.currentGame = [0, 0]; // On réinitialise le current game.
 
@@ -70,21 +69,19 @@ export function computeNextScore(score: Score, point: Point) {
 		return score;
 	}
 
-	// CAS RESTANT : le joueur a 40
-
-	if (currentLoserGameScore === 40) { // Le joueur adverse a aussi 40
+	if (currentWinnerGameScore === 40 && currentLoserGameScore === 40) { // Les joueurs sont à égalité
 		score.currentGame[winnerCode] = "AV"; // On passe le joueur a avantage
 		return score;
 	}
 
-	if (currentLoserGameScore === "AV") { // Le joueur adverse avait avantage
+	if (currentWinnerGameScore === 40 && currentLoserGameScore === "AV") { // Le joueur adverse a avantage
 		score.currentGame[loserCode] = 40; // On repasse le joueur adverse à 40
 		return score;
 	}
 
-	// CAS RESTANT : le joueur a 40 et l'adversaire à 30 ou moins, il gagne le jeu
+	// CAS RESTANT : le joueur a 40 et l'adversaire à 30 ou moins, ou bien le joueur a avantage : il gagne alors le jeu
 	score.currentGame = [0, 0]; // On réinitialise le currentGame
-	score.sets[score.sets.length - 1][winnerCode] += 1; // On augmente le score du joueur
+	score.sets[score.sets.length - 1][winnerCode] += 1; // On augmente son nombre de jeu gagné
 
 	if (score.sets[score.sets.length - 1][winnerCode] === 6 && currentSet[loserCode] <= 4) { // Si le joueur vient de gagner le set
 		score.sets.push([0, 0]); // On itinialise le premier set 
