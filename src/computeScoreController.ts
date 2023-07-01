@@ -5,7 +5,7 @@ import { Point } from "./types";
 export function computeScoreController(req: Request, res: Response) {
 	const points = req.body;
 
-	if (!isValidPointsArray(points)) {
+	if (! isValidPointsArray(points)) {
 		return res
 			.status(400)
 			.json({
@@ -15,7 +15,7 @@ export function computeScoreController(req: Request, res: Response) {
 	}
 
 	const score = computeScore(points);
-
+	
 	res.json(score);
 }
 

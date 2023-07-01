@@ -11,4 +11,4 @@ app.use(express.json());
 app.use(express.static("client/dist"));
 
 // API Routes
-app.post("/scores", computeScoreController);
+app.post("/api/scores", computeScoreController);
