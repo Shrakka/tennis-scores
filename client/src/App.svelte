@@ -1,47 +1,67 @@
 <script lang="ts">
-  import svelteLogo from './assets/svelte.svg'
-  import viteLogo from '/vite.svg'
-  import Counter from './lib/Counter.svelte'
 </script>
 
-<main>
-  <div>
-    <a href="https://vitejs.dev" target="_blank" rel="noreferrer">
-      <img src={viteLogo} class="logo" alt="Vite Logo" />
-    </a>
-    <a href="https://svelte.dev" target="_blank" rel="noreferrer">
-      <img src={svelteLogo} class="logo svelte" alt="Svelte Logo" />
-    </a>
-  </div>
-  <h1>Vite + Svelte</h1>
-
-  <div class="card">
-    <Counter />
-  </div>
-
-  <p>
-    Check out <a href="https://github.com/sveltejs/kit#readme" target="_blank" rel="noreferrer">SvelteKit</a>, the official Svelte app framework powered by Vite!
-  </p>
-
-  <p class="read-the-docs">
-    Click on the Vite and Svelte logos to learn more
-  </p>
-</main>
+<div class="container">
+  <header>
+    <h1>🎾 Tennis Score Generator 🎾</h1>
+  </header>
+  
+  <main>
+    <h2>Settings</h2>
+  
+    <form id="generator">
+      <div class="grid">
+        <div>
+          <label for="first-player-name">First player</label>
+          <input type="text" id="first-player-name" name="first-player-name" placeholder="Player 1">
+      
+          <label for="first-player-level">Level</label>
+          <input type="range" id="first-player-level" min="1" max="10" value="5" name="first-player-level">
+        </div>
+    
+        <div>
+          <label for="second-player-name">Second player</label>
+          <input type="text" id="second-player-name" name="second-player-name" placeholder="Player 2">
+      
+          <label for="second-player-level">Level</label>
+          <input type="range" id="second-player-level" min="1" max="10" value="5" name="second-player-level">
+        </div>
+      </div>
+      
+      <div class="grid">
+        <div>
+          <label for="nb-of-points">Number of points to play</label>
+          <input type="number" name="nb-of-points" id="nb-of-points" value="150">
+        </div>
+  
+        <button>Generate score sequence</button>
+      </div>
+    </form>
+  
+    <h2>Results</h2>
+  
+    <article id="sequence-result" class="sequence-result">
+    </article>
+  
+    <article id="score-result">
+      <pre><code>
+      </code></pre>
+    </article>
+  
+  </main>
+  
+  <footer>
+    <small>Made with ❤️ by <a href="https://github.com/Shrakka">Enzo</a></small>
+  </footer>
+</div>
 
 <style>
-  .logo {
-    height: 6em;
-    padding: 1.5em;
-    will-change: filter;
-    transition: filter 300ms;
+  header {
+    margin-top: 3rem;
   }
-  .logo:hover {
-    filter: drop-shadow(0 0 2em #646cffaa);
-  }
-  .logo.svelte:hover {
-    filter: drop-shadow(0 0 2em #ff3e00aa);
-  }
-  .read-the-docs {
-    color: #888;
+
+  .sequence-result {
+    height: 190px;
+    overflow: scroll;
   }
 </style>
