@@ -1,6 +1,6 @@
 const generatorForm = document.getElementById("generator");
 
-generatorForm.addEventListener("submit", (event) => {
+generatorForm.addEventListener("submit", async (event) => {
   event.preventDefault();
   const form = new FormData(generatorForm);
 
@@ -17,6 +17,16 @@ generatorForm.addEventListener("submit", (event) => {
   // Display sequence
   const sequenceResult = document.getElementById("sequence-result");
   sequenceResult.innerHTML = sequence.map(buildPlayerPoint).join("");
+
+  const httpResponse = await fetch("http://localhost:3000/scores", {
+    method: "POST",
+    body: JSON.stringify(sequence),
+    headers: { "Content-Type": "application/json" }
+  });
+  const result = await httpResponse.json();
+
+  document.querySelector("code").innerHTML = JSON.stringify(result);
+  
   
   function generateLikelyPoint() {
     const threshold = 0.5 + levelDifference / 20;
@@ -32,9 +42,3 @@ generatorForm.addEventListener("submit", (event) => {
     return `<li>${point ? secondPlayerName : firstPlayerName } scored !</li>`;
   }
 });
-
-function displaySequence(sequence) {
-    const sequenceResult = document.getElementById("sequence-result");
-
-    sequenceResult.innerHTML = sequence.map(point => {})
-}

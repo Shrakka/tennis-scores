@@ -84,9 +84,9 @@ export function computeNextScore(score: Score, point: Point) {
 
 	// CAS RESTANT : le joueur a 40 et l'adversaire à 30 ou moins, il gagne le jeu
 	score.currentGame = [0, 0]; // On réinitialise le currentGame
-	currentSet[winnerCode] += 1; // On augmente le score du joueur
+	score.sets[score.sets.length - 1][winnerCode] += 1; // On augmente le score du joueur
 
-	if (currentSet[winnerCode] === 6 && currentSet[loserCode] <= 4) { // Si le joueur vient de gagner le set
+	if (score.sets[score.sets.length - 1][winnerCode] === 6 && currentSet[loserCode] <= 4) { // Si le joueur vient de gagner le set
 		score.sets.push([0, 0]); // On itinialise le premier set 
 	}
 
