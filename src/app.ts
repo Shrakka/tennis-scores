@@ -8,7 +8,7 @@ export const app = express();
 app.use(express.json());
 
 // Serve front files
-app.use(express.static("public"));
+app.use(express.static("client/dist"));
 
 // API Routes
 app.post("/scores", computeScoreController);
