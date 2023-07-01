@@ -83,7 +83,10 @@ export function computeNextScore(score: Score, point: Point) {
 	score.currentGame = [0, 0]; // On réinitialise le currentGame
 	score.sets[score.sets.length - 1][winnerCode] += 1; // On augmente son nombre de jeu gagné
 
-	if (score.sets[score.sets.length - 1][winnerCode] === 6 && currentSet[loserCode] <= 4) { // Si le joueur vient de gagner le set
+	if (
+		(score.sets[score.sets.length - 1][winnerCode] === 6 && currentSet[loserCode] <= 4) ||
+		(score.sets[score.sets.length - 1][winnerCode] === 7 && currentSet[loserCode] <= 5)
+	) { // Si le joueur vient de gagner le set
 		score.sets.push([0, 0]); // On itinialise le premier set 
 	}
 

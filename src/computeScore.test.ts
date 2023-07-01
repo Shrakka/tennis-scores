@@ -80,6 +80,19 @@ describe("computeScore", () => {
     expect(score).to.deep.equal({ sets: [[0, 6], [0, 0]], currentGame: [0, 0] });
   });
 
+  it("should initiate a new set when score is 6 - 5 and first player wins the 7th game", async () => {
+    const points: Point[] = [
+      ...Array(4 * 5).fill(0), // 5 - 0
+      ...Array(4 * 5).fill(1), // 5 - 5
+      ...Array(4).fill(0), // 6 - 5
+      ...Array(4).fill(0) // 7 - 5
+    ];
+
+    const score = computeScore(points);
+
+    expect(score).to.deep.equal({ sets: [[7, 5], [0, 0]], currentGame: [0, 0] });
+  });
+
   describe("Deuce aka. égalité", () => {
     const DEUCE_POINTS: Point[] = [0, 0, 0, 1, 1, 1];
 
@@ -279,6 +292,27 @@ describe("computeScore", () => {
       const score = computeScore(points);
   
       expect(score).to.deep.include({ sets: [[0, 1]], currentGame: [0, 0] });
+    });
+
+    it("should handle a complexe set that ends with 5 - 7", async () => {
+      const points: Point[] = [
+        1, 0, 1, 0, 0, 1, 0, 1, 1, 0, 0, 0, // 1 - 0
+        0, 0, 1, 1, 1, 0, 0, 0, // 2 - 0
+        0, 1, 1, 0, 1, 1, // 2 - 1
+        1, 1, 1, 0, 1, // 2 - 2
+        1, 0, 1, 0, 0, 1, 1, 1, // 2 - 3
+        0, 1, 1, 0, 0, 1, 0, 0, // 3 - 3
+        1, 1, 0, 1, 1, // 3 - 4
+        1, 0, 0, 0, 0, // 4 - 4
+        0, 1, 1, 1, 1, // 4 - 5
+        0, 1, 1, 0, 0, 0, // 5 - 5
+        0, 1, 1, 0, 1, 0, 1, 1, // 5 - 6
+        1, 1, 1, 1, // 5 - 7
+      ];
+
+      const score = computeScore(points);
+  
+      expect(score).to.deep.equal({ sets: [[5, 7], [0, 0]], currentGame: [0, 0] });
     });
   });
 });
