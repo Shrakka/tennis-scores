@@ -93,7 +93,7 @@ describe("computeScore", () => {
     expect(score).to.deep.equal({ sets: [[7, 5], [0, 0]], currentGame: [0, 0] });
   });
 
-  describe("Deuce aka. égalité", () => {
+  describe("deuce aka. égalité", () => {
     const DEUCE_POINTS: Point[] = [0, 0, 0, 1, 1, 1];
 
     it("should reach a score of deuce", async () => {
