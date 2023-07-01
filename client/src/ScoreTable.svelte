@@ -40,7 +40,9 @@
 </div>
 
 <script lang="ts">
-  export let score: any;
+  import type { Score } from "./types";
+
+  export let score: Score;
   export let firstPlayerName: string;
   export let secondPlayerName: string;
 

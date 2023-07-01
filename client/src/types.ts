@@ -1,5 +1,3 @@
-// FIXME: mutualize common types
-
 export type FirstPlayerWinsPointCode = 0;
 export type SecondPlayerWinsPointCode = 1;
 

@@ -95,6 +95,7 @@
 import { tick } from "svelte";
 import Layout from "./Layout.svelte";
 import ScoreTable from "./ScoreTable.svelte";
+import type { Score } from "./types";
 
 let firstPlayerName = "";
 let secondPlayerName = "";
@@ -133,7 +134,7 @@ async function scrollTo(element: Element) {
   element.scrollIntoView({ behavior: "smooth" });
 }
 
-async function fetchScore() {
+async function fetchScore(): Promise<Score> {
   const httpResponse = await fetch("/api/scores", {
     method: "POST",
     body: JSON.stringify(points),
